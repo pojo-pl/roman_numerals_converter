@@ -38,6 +38,11 @@ string to_roman_numeral(int n)
 	} else if(n >= 50 && n <= 89) {
 		string rn = "V";
 		return rn + to_roman_numeral(n - 50);
+	} else if(n >= 90 && n <= 99) {
+		string rn = "XC";
+		return rn + to_roman_numeral(n - 90);
+	} else if(n == 100) {
+		return "C";
 	}
 
 	throw invalid_argument{ "failed to convert num: " + to_string(n) };
