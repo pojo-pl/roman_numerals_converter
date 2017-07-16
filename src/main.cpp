@@ -1,25 +1,12 @@
 #include <iostream>
 using namespace std;
 
-/*
-1 - I
-2 - II
-3 - III
-4 - IV
-5 - V
-6 - VI
-7 - VII
-8 - VIII
-9 - IX
-10 - X
-*/
-
 string to_roman_numeral(int n)
 {
 	if(n < 0) {
 		throw invalid_argument{ "no '0' in roman numerals" };
 	} else if(n == 0) {
-		return "nulla";
+		return "";
 	} else if(n <= 3) {
 		string rn;
 		rn.reserve(n);
@@ -45,16 +32,30 @@ string to_roman_numeral(int n)
 	} else if(n > 10 && n <= 39) {
 		string rn = "X";
 		return rn + to_roman_numeral(n - 10);
+	} else if(n > 39 && n < 50) {
+		string rn = "XV";
+		return rn + to_roman_numeral(n - 40);
+	} else if(n >= 50 && n <= 89) {
+		string rn = "V";
+		return rn + to_roman_numeral(n - 50);
 	}
 
 	throw invalid_argument{ "failed to convert num: " + to_string(n) };
 }
 
 
-int main()
+int main(int argc, char ** argv)
 {
 	try {
-		for(int i = 1; i <= 40; ++i) {
+		if(argc < 3) {
+			cerr << "error: you must enter min and max numbers"
+				<< endl;
+			return 1;
+		}
+		int min = std::stoi(argv[1]);
+		int max = std::stoi(argv[2]);
+
+		for(int i = min; i <= max; ++i) {
 			cout << to_roman_numeral(i) << '\n';
 		}
 	} catch(invalid_argument const& e) {
