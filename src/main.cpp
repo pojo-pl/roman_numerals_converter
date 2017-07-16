@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+constexpr int max_num = 100;
+
 string to_roman_numeral(int n)
 {
 	if(n < 0) {
@@ -53,12 +55,17 @@ int main(int argc, char ** argv)
 {
 	try {
 		if(argc < 3) {
-			cerr << "error: you must enter min and max numbers"
+			cerr << "you must enter min and max numbers"
 				<< endl;
 			return 1;
 		}
 		int min = std::stoi(argv[1]);
 		int max = std::stoi(argv[2]);
+
+		if(max > max_num) {
+			cerr << "max num '" << max << "' too big to convert" << endl;
+			return 2;
+		}
 
 		for(int i = min; i <= max; ++i) {
 			cout << to_roman_numeral(i) << '\n';
