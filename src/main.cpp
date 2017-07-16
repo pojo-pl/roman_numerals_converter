@@ -70,9 +70,11 @@ int main(int argc, char ** argv)
 		for(int i = min; i <= max; ++i) {
 			cout << to_roman_numeral(i) << '\n';
 		}
+		return 0;
 	} catch(invalid_argument const& e) {
 		cerr << e.what() << endl;
 	} catch(exception const& e) {
 		cerr << "fatal error: " << e.what() << endl;
 	}
+	return 3;
 }
